@@ -53,14 +53,9 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         case MQTT_EVENT_CONNECTED:
             ESP_LOGI(TAG, "MQTT_EVENT_CONNECTED");
             msg_id = esp_mqtt_client_subscribe(client, "/topic/qos0", 0);
-            ESP_LOGI(TAG, "ESP32 se inscreve nda fila /topic/qos0, MSD_ID=%d", msg_id);
+            ESP_LOGI(TAG, "ESP32 se inscreve na fila /topic/qos0, MSD_ID=%d", msg_id);
             msg_id = esp_mqtt_client_subscribe(client, "/topic/qos1", 1);
-            ESP_LOGI(TAG, "ESP32 se inscreve nda fila /topic/qos1, MSD_ID=%d", msg_id);
-            
-            msg_id = esp_mqtt_client_publish(client, "/topic/qos0", "data", 0, 0, 0);
-            ESP_LOGI(TAG, "ESP32 envia uma mensagem para a fila /topic/qos0, MSD_ID=%d", msg_id);
-            msg_id = esp_mqtt_client_publish(client, "/topic/qos1", "data", 0, 1, 0);
-            ESP_LOGI(TAG, "ESP32 envia uma mensagem para a fila /topic/qos1, MSD_ID=%d", msg_id);
+            ESP_LOGI(TAG, "ESP32 se inscreve na fila /topic/qos1, MSD_ID=%d", msg_id);
             break;
         case MQTT_EVENT_DATA:
             ESP_LOGI(TAG, "MQTT_EVENT_DATA");
@@ -75,8 +70,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         }
 }
 
-static void mqtt_app_start(void)
-{
+static void mqtt_app_start(void) {
     esp_mqtt_client_config_t mqtt_config = {
         .host = "192.168.0.16",
         .port = 1883,
@@ -88,8 +82,7 @@ static void mqtt_app_start(void)
     esp_mqtt_client_start(client);
 }
 
-void app_main(void)
-{
+void app_main(void) {
     ESP_LOGI(TAG, "[APP] Startup...");
     ESP_LOGI(TAG, "[APP] Free memory: %d bytes", esp_get_free_heap_size());
     ESP_LOGI(TAG, "[APP] IDF version: %s", esp_get_idf_version());
